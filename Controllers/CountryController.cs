@@ -33,8 +33,17 @@ namespace World.Controllers
       List<Country> nameCountries = Country.Filter(inputCode, inputName, inputContinent, inputRegion);
 
       return View("Index", nameCountries);
+    }
 
+    [HttpPost("/filter-population")]
+    public ActionResult FilterPopulation()
+    {
+      string minPopulation =  Request.Form["min-pop"];
+      string maxPopulation = Request.Form["max-pop"];
 
+      List<Country> populationCountries = Country.FilterPopulation(minPopulation, maxPopulation);
+
+      return View("Index", populationCountries);
     }
   }
 }

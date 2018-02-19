@@ -27,6 +27,17 @@
 
       <button type="submit">Submit filter criteria</button>
     </form>
+
+    <h2>POPULATION FILTER</h2>
+    <form action="/filter-population" method="post">
+      <label for="min-pop">Minimum Population:</label>
+      <input type="number" name="min-pop" min=0>
+
+      <label for="max-pop">Maximum Population:</label>
+      <input type="number" name="max-pop" min=0>
+
+      <button type="submit">Filter for Population</button>
+    </form>
     @foreach (var country in Model)
     {
       <p>@country.GetCode(), @country.GetName(), @country.GetContinent(), @country.GetRegion(), @country.GetPopulation()</p>

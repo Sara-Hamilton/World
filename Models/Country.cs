@@ -110,6 +110,40 @@ namespace World.Models
       return filterCountries;
     }
 
+    public static List<Country> FilterPopulation(string minPopulation, string maxPopulation)
+    {
+      if (minPopulation == "")
+      {
+        minPopulation = "(SELECT MIN(Population) FROM Country)";
+      }
+      if (maxPopulation == "")
+      {
+        maxPopulation = "(SELECT MAX(Population) FROM Country)";
+      }
+      List<Country> filterCountries = new List<Country> {};
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"SELECT Code, Name, Continent, Region, Population FROM Country WHERE Population BETWEEN " + minPopulation + " AND " + maxPopulation + ";";
+      MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
+      while (rdr.Read())
+      {
+        string countryCode = rdr.GetString(0);
+        string countryName = rdr.GetString(1);
+        string countryContinent = rdr.GetString(2);
+        string countryRegion = rdr.GetString(3);
+        int countryPopulation = rdr.GetInt32(4);
+        //int countryCapital = rdr.GetInt32(5);
+        Country newCountry = new Country(countryCode, countryName, countryContinent, countryRegion, countryPopulation);
+        filterCountries.Add(newCountry);
+      }
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
+      return filterCountries;
+    }
 
     public static List<Country> FilterName(string userInput)
     {

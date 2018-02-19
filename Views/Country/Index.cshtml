@@ -1,36 +1,69 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Countries</title>
-  </head>
-  <body>
+@{
+  Layout = "_Layout";
+}
     <h1>COUNTRY FILTER</h1>
+
+    <a href="/city">Click here to view Cities</a>
     <form action="/filter-countries" method="post">
-      <label for="code">Filter by country code</label>
-      <input name="code" type="text">
+    <div class="row">
+      <div class="form-group col-sm-4">
+        <label for="code">Filter by country code</label>
+        <input class="form-control" name="code" type="text">
+      </div>
 
-      <label for="name">Filter by name</label>
-      <input name="name" type="text">
+      <div class="form-group col-sm-4">
+        <label for="name">Filter by name</label>
+        <input class="form-control" name="name" type="text">
+      </div>
 
-      <label for="continent">Filter by continent</label>
-      <input name="continent" type="text">
+      <div class="form-group col-sm-4">
+        <label for="continent">Filter by continent</label>
+        <input class="form-control" name="continent" type="text">
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-sm-4">
+        <label for="region">Filter by region</label>
+        <input class="form-control" name="region" type="text">
+      </div>
 
-      <label for="region">Filter by region</label>
-      <input name="region" type="text">
+      <div class="form-group col-sm-4">
+        <label for="min-pop">Minimum Population:</label>
+        <input class="form-control" type="number" name="min-pop" min=0>
+      </div>
 
-      <label for="min-pop">Minimum Population:</label>
-      <input type="number" name="min-pop" min=0>
+      <div class="form-group col-sm-4">
+        <label for="max-pop">Maximum Population:</label>
+        <input class="form-control" type="number" name="max-pop" min=0>
+      </div>
+    </div>
 
-      <label for="max-pop">Maximum Population:</label>
-      <input type="number" name="max-pop" min=0>
-
-      <button type="submit">Submit filter criteria</button>
+      <button type="submit" class="btn btn-primary">Submit filter criteria</button>
     </form>
 
-    @foreach (var country in Model)
-    {
-      <p>@country.GetCode(), @country.GetName(), @country.GetContinent(), @country.GetRegion(), @country.GetPopulation()</p>
-    }
-  </body>
-</html>
+    <div class="output">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Country Code</th>
+            <th>Name</th>
+            <th>Continent</th>
+            <th>Region</th>
+            <th>Population</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          @foreach (var country in Model)
+          {
+            <tr>
+              <td class="col-sm-2">@country.GetCode()</td>
+              <td class="col-sm-3">@country.GetName()</td>
+              <td class="col-sm-2">@country.GetContinent()</td>
+              <td class="col-sm-2">@country.GetRegion()</td>
+              <td class="col-sm-2">@country.GetPopulation()</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>

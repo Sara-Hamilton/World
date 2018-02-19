@@ -1,22 +1,35 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Cities</title>
-  </head>
-  <body>
+@{
+  Layout = "_Layout";
+}
     <h1>CITY FILTER</h1>
-    <form method="post" action="/city/sort-asc">
-      <button type="submit">Sort Ascending By Population</button>
+    <p><a href="/">Click here to view Countries</a></p>
+    <form class="button-form" method="post" action="/city/sort-asc">
+      <button type="submit" class="btn btn-primary">Sort Ascending By Population</button>
     </form>
-    <form method="post" action="/city/sort-desc">
-      <button type="submit">Sort Descending By Population</button>
+    <form class="button-form" method="post" action="/city/sort-desc">
+      <button type="submit" class="btn btn-primary">Sort Descending By Population</button>
     </form>
 
-    @foreach (var city in Model)
-    {
-      <p>@city.GetName(), @city.GetCountryCode(), @city.GetDistrict(), @city.GetPopulation()</p>
-    }
-
-  </body>
-</html>
+    <div class="output">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Country Code</th>
+            <th>District/State</th>
+            <th>Population</th>
+          </tr>
+        </thead>
+        <tbody>
+          @foreach (var city in Model)
+          {
+            <tr>
+              <td class="col-sm-3">@city.GetName()</td>
+              <td class="col-sm-3">@city.GetCountryCode()</td>
+              <td class="col-sm-3">@city.GetDistrict()</td>
+              <td class="col-sm-3">@city.GetPopulation()</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>

@@ -14,36 +14,19 @@ namespace World.Controllers
       return View(allCountries);
     }
 
-    [HttpPost("/filter-name")]
-    public ActionResult Name()
-    {
-      string inputName = Request.Form["name"];
-      List<Country> nameCountries = Country.FilterName(inputName);
-      return View("Index", nameCountries);
-    }
-
     [HttpPost("/filter-countries")]
     public ActionResult Filter()
     {
       string inputCode = Request.Form["code"];
-      string inputName = Request.Form["name1"];
+      string inputName = Request.Form["name"];
       string inputContinent = Request.Form["continent"];
       string inputRegion = Request.Form["region"];
-
-      List<Country> nameCountries = Country.Filter(inputCode, inputName, inputContinent, inputRegion);
-
-      return View("Index", nameCountries);
-    }
-
-    [HttpPost("/filter-population")]
-    public ActionResult FilterPopulation()
-    {
       string minPopulation =  Request.Form["min-pop"];
       string maxPopulation = Request.Form["max-pop"];
 
-      List<Country> populationCountries = Country.FilterPopulation(minPopulation, maxPopulation);
+      List<Country> filterCountries = Country.Filter(inputCode, inputName, inputContinent, inputRegion, minPopulation, maxPopulation);
 
-      return View("Index", populationCountries);
+      return View("Index", filterCountries);
     }
   }
 }

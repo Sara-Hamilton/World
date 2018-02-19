@@ -5,19 +5,13 @@
     <title>Countries</title>
   </head>
   <body>
-    <p>Hello</p>
-    <form action="/filter-name" method="post">
-      <label for="name">Filter by Name</label>
-      <input name="name" type="text">
-      <button type="submit">Submit filter by name</button>
-    </form>
-    <h2>BEST FILTER</h2>
+    <h1>COUNTRY FILTER</h1>
     <form action="/filter-countries" method="post">
       <label for="code">Filter by country code</label>
       <input name="code" type="text">
 
-      <label for="name1">Filter by name</label>
-      <input name="name1" type="text">
+      <label for="name">Filter by name</label>
+      <input name="name" type="text">
 
       <label for="continent">Filter by continent</label>
       <input name="continent" type="text">
@@ -25,19 +19,15 @@
       <label for="region">Filter by region</label>
       <input name="region" type="text">
 
-      <button type="submit">Submit filter criteria</button>
-    </form>
-
-    <h2>POPULATION FILTER</h2>
-    <form action="/filter-population" method="post">
       <label for="min-pop">Minimum Population:</label>
       <input type="number" name="min-pop" min=0>
 
       <label for="max-pop">Maximum Population:</label>
       <input type="number" name="max-pop" min=0>
 
-      <button type="submit">Filter for Population</button>
+      <button type="submit">Submit filter criteria</button>
     </form>
+    
     @foreach (var country in Model)
     {
       <p>@country.GetCode(), @country.GetName(), @country.GetContinent(), @country.GetRegion(), @country.GetPopulation()</p>

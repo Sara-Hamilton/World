@@ -6,6 +6,11 @@
   </head>
   <body>
     <p>Hello</p>
+    <form action="/filter-name" method="post">
+      <label for="name">Filter by Name</label>
+      <input name="name" type="text">
+      <button type="submit">Submit filter by name</button>
+    </form>
     @foreach (var country in Model)
     {
       <p>@country.GetCode(), @country.GetName(), @country.GetContinent(), @country.GetRegion(), @country.GetPopulation()</p>

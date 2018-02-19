@@ -81,5 +81,33 @@ namespace World.Models
       }
       return allCountries;
     }
+
+    public static List<Country> FilterName(string userInput)
+    {
+      List<Country> filterNameCountries = new List<Country> {};
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"SELECT Code, Name, Continent, Region, Population, Capital FROM Country WHERE Name LIKE '%" + userInput + "%'";
+      MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
+      while (rdr.Read())
+      {
+        string countryCode = rdr.GetString(0);
+        string countryName = rdr.GetString(1);
+        string countryContinent = rdr.GetString(2);
+        string countryRegion = rdr.GetString(3);
+        int countryPopulation = rdr.GetInt32(4);
+        //int countryCapital = rdr.GetInt32(5);
+        Country newCountry = new Country(countryCode, countryName, countryContinent, countryRegion, countryPopulation);
+        filterNameCountries.Add(newCountry);
+      }
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
+      return filterNameCountries;
+    }
+
   }
 }

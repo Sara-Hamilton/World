@@ -13,5 +13,13 @@ namespace World.Controllers
       List<Country> allCountries = Country.GetAll();
       return View(allCountries);
     }
+
+    [HttpPost("/filter-name")]
+    public ActionResult Name()
+    {
+      string inputName = Request.Form["name"];
+      List<Country> nameCountries = Country.FilterName(inputName);
+      return View("Index", nameCountries);
+    }
   }
 }

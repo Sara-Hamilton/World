@@ -27,7 +27,7 @@
 
       <button type="submit">Submit filter criteria</button>
     </form>
-    
+
     @foreach (var country in Model)
     {
       <p>@country.GetCode(), @country.GetName(), @country.GetContinent(), @country.GetRegion(), @country.GetPopulation()</p>

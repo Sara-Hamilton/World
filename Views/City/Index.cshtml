@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Cities</title>
+  </head>
+  <body>
+    <h1>CITY FILTER</h1>
+    <form method="post" action="/city/sort-asc">
+      <button type="submit">Sort Ascending By Population</button>
+    </form>
+    <form method="post" action="/city/sort-desc">
+      <button type="submit">Sort Descending By Population</button>
+    </form>
+
+    @foreach (var city in Model)
+    {
+      <p>@city.GetName(), @city.GetCountryCode(), @city.GetDistrict(), @city.GetPopulation()</p>
+    }
+
+  </body>
+</html>

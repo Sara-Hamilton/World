@@ -76,41 +76,13 @@ namespace World.Models
       return allCities;
     }
 
-    public static List<City> SortCitiesAsc()
+    public static List<City> Sort(string direction, string input)
     {
       List<City> sortedCities = new List<City>{};
       MySqlConnection conn = DB.Connection();
       conn.Open();
       MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"SELECT * FROM City ORDER BY Population ASC;";
-      MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
-      while (rdr.Read())
-      {
-        int cityId = rdr.GetInt32(0);
-        string cityName = rdr.GetString(1);
-        string cityCountryCode = rdr.GetString(2);
-        string cityDistrict = rdr.GetString(3);
-        int cityPopulation = rdr.GetInt32(4);
-
-        City newCity = new City(cityId, cityName, cityCountryCode, cityDistrict, cityPopulation);
-
-        sortedCities.Add(newCity);
-      }
-      conn.Close();
-      if (conn != null)
-      {
-        conn.Dispose();
-      }
-      return sortedCities;
-    }
-
-    public static List<City> SortCitiesDesc()
-    {
-      List<City> sortedCities = new List<City>{};
-      MySqlConnection conn = DB.Connection();
-      conn.Open();
-      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"SELECT * FROM City ORDER BY Population DESC;";
+      cmd.CommandText = @"SELECT * FROM City ORDER BY " + input + " " + direction + ";";
       MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
       while (rdr.Read())
       {

@@ -3,11 +3,16 @@
 }
     <h1>CITY FILTER</h1>
     <p><a href="/">Click here to view Countries</a></p>
-    <form class="button-form" method="post" action="/city/sort-asc">
-      <button type="submit" class="btn btn-primary">Sort Ascending By Population</button>
-    </form>
-    <form class="button-form" method="post" action="/city/sort-desc">
-      <button type="submit" class="btn btn-primary">Sort Descending By Population</button>
+    <form class="button-form" method="post" action="/city/sort">
+      <select name="sort-selection">
+        <option value="Name">Name</option>
+        <option value="CountryCode">Country Code</option>
+        <option value="District">District/State</option>
+        <option value="Population">Population</option>
+      </select>
+
+      <button type="submit" name="selection" value="ascending" class="btn btn-primary">Sort Ascending</button>
+      <button type="submit" name="selection" value="descending" class="btn btn-primary">Sort Descending</button>
     </form>
 
     <div class="output">

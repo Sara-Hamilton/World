@@ -14,18 +14,20 @@ namespace World.Controllers
       return View("Index", allCities);
     }
 
-    [HttpPost("/city/sort-asc")]
-    public ActionResult SortAsc()
+    [HttpPost("/city/sort")]
+    public ActionResult Sort()
     {
-      List<City> sortCitiesAsc = City.SortCitiesAsc();
-      return View("Index", sortCitiesAsc);
-    }
-
-    [HttpPost("/city/sort-desc")]
-    public ActionResult SortDesc()
-    {
-      List<City> sortCitiesDesc = City.SortCitiesDesc();
-      return View("Index", sortCitiesDesc);
+      string sortSelection = Request.Form["sort-selection"];
+      List<City> sortCities = new List<City> {};
+      if(Request.Form["selection"].Equals("ascending"))
+      {
+        sortCities = City.Sort("ASC", sortSelection);
+      }
+      else if(Request.Form["selection"].Equals("descending"))
+      {
+        sortCities = City.Sort("DESC", sortSelection);
+      }
+      return View("Index", sortCities);
     }
   }
 }

@@ -21,5 +21,20 @@ namespace World.Controllers
       List<Country> nameCountries = Country.FilterName(inputName);
       return View("Index", nameCountries);
     }
+
+    [HttpPost("/filter-countries")]
+    public ActionResult Filter()
+    {
+      string inputCode = Request.Form["code"];
+      string inputName = Request.Form["name1"];
+      string inputContinent = Request.Form["continent"];
+      string inputRegion = Request.Form["region"];
+
+      List<Country> nameCountries = Country.Filter(inputCode, inputName, inputContinent, inputRegion);
+
+      return View("Index", nameCountries);
+
+
+    }
   }
 }

@@ -81,6 +81,35 @@ namespace World.Models
       }
       return allCountries;
     }
+    //SELECT * FROM Country WHERE Code LIKE '%%' AND Name LIKE '%United%'
+    //TODO handle population filter and handle capital with some null values
+    public static List<Country> Filter(string codeInput, string nameInput, string continentInput, string regionInput)
+    {
+      List<Country> filterCountries = new List<Country> {};
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"SELECT Code, Name, Continent, Region, Population FROM Country WHERE Code LIKE '%" + codeInput + "%' AND Name LIKE '%" + nameInput + "%' AND Continent LIKE '%" + continentInput + "%' AND Region LIKE '%" + regionInput + "%';";
+      MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
+      while (rdr.Read())
+      {
+        string countryCode = rdr.GetString(0);
+        string countryName = rdr.GetString(1);
+        string countryContinent = rdr.GetString(2);
+        string countryRegion = rdr.GetString(3);
+        int countryPopulation = rdr.GetInt32(4);
+        //int countryCapital = rdr.GetInt32(5);
+        Country newCountry = new Country(countryCode, countryName, countryContinent, countryRegion, countryPopulation);
+        filterCountries.Add(newCountry);
+      }
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
+      return filterCountries;
+    }
+
 
     public static List<Country> FilterName(string userInput)
     {

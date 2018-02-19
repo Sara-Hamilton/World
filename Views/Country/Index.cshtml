@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Countries</title>
+  </head>
+  <body>
+    <p>Hello</p>
+    @foreach (var country in Model)
+    {
+      <p>@country.GetCode(), @country.GetName(), @country.GetContinent(), @country.GetRegion(), @country.GetPopulation()</p>
+    }
+  </body>
+</html>

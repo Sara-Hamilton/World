@@ -1,0 +1,30 @@
+@{
+  Layout = "_Layout";
+}
+
+<div class="output">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Country Code</th>
+        <th>Name</th>
+        <th>Continent</th>
+        <th>Region</th>
+        <th>Population</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      @foreach (var country in Model)
+      {
+        <tr>
+          <td class="col-sm-2">@country.GetCode()</td>
+          <td class="col-sm-3">@country.GetName()</td>
+          <td class="col-sm-2">@country.GetContinent()</td>
+          <td class="col-sm-2">@country.GetRegion()</td>
+          <td class="col-sm-2">@country.GetPopulation()</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

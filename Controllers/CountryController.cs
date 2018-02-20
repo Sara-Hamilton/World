@@ -28,5 +28,13 @@ namespace World.Controllers
 
       return View("Index", filterCountries);
     }
+
+    [HttpGet("/random")]
+    public ActionResult Random()
+    {
+      List<Country> randomCountry = Country.RandomCountry();
+
+      return View("Random", randomCountry);
+    }
   }
 }

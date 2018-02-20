@@ -110,5 +110,31 @@ namespace World.Models
       }
       return filterCountries;
     }
+
+    public static List<Country> RandomCountry()
+    {
+      List<Country> allCountries = new List<Country> {};
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"SELECT Code, Name, Continent, Region, Population, Capital FROM Country ORDER BY RAND() LIMIT 1;";
+      MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
+      while (rdr.Read())
+      {
+        string countryCode = rdr.GetString(0);
+        string countryName = rdr.GetString(1);
+        string countryContinent = rdr.GetString(2);
+        string countryRegion = rdr.GetString(3);
+        int countryPopulation = rdr.GetInt32(4);
+        Country newCountry = new Country(countryCode, countryName, countryContinent, countryRegion, countryPopulation);
+        allCountries.Add(newCountry);
+      }
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
+      return allCountries;
+    }
   }
 }

@@ -5,7 +5,7 @@
 #### _By Kayla Ondracek and Sara Hamilton_
 
 ## Description
-_This is an Epicodus practice project for Monday of week 3 of the C# course. Its purpose is for practicing accessing and selecting values from a database of country/city values._
+_This is an Epicodus practice project for week 3 of the C# course. Its purpose is to demonstrate understanding of SQL and databases._
 
 #### _World_
 * Displays a list of Countries and related info
